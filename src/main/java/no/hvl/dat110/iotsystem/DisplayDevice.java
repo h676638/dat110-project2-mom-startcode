@@ -23,12 +23,20 @@ public class DisplayDevice {
 		// - receive messages on the topic
 		// - unsubscribe from the topic
 		// - disconnect from the broker
-		
+		Client client = new Client("display", Common.BROKERHOST, Common.BROKERPORT);
+		client.connect();
+		client.createTopic("temperature");
+		client.subscribe("temperature");
+		for (int i = 0; i < COUNT; i++) {
+
+			client.receive();
+		}
+		client.unsubscribe("temperature");
+		client.disconnect();
 		// TODO - END
 		
 		System.out.println("Display stopping ... ");
 		
-		throw new UnsupportedOperationException(TODO.method());
-		
+
 	}
 }
